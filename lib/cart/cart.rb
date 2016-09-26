@@ -3,19 +3,30 @@ class Cart
 
   class << self
     def build_from_hash hash
-      items = if hash["cart"]
-        hash["cart"]["items"].map do |item_data|
-          CartItem.new item_data["product_id"], item_data["quantity"]
+      # items = if hash["cart"]
+      #   hash["cart"]["items"].map do |item_data|
+      #     CartItem.new item_data["product_id"], item_data["quantity"]
+      #   end
+      # else
+      #   Array.new
+      # end
+      # new items
+      hash.each do |key, value|
+        puts "~~~~~~~#{key}:#{value}"
+        if key.include? "cart-"
+          items = value.map do |item_data|
+            CartItem.new item_data["product_id"], item_data["quantity"]
+          end
         end
-      else
-        Array.new
       end
-      new items
+      new items ||= Array.new
+      puts "~~~~~~~#{items.count}:#{items}"
     end
   end
 
   def initialize items = []
     @items = items
+    puts "~~~~~~~#{@items.count}:#{@items}"
   end
 
   def add_item product_id

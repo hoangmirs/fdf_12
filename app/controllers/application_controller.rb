@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   private
 
   def create_cart
-    @cart = Cart.build_from_hash session
+    @cart = Cart.build_from_hash(session) || Cart.new
+    puts "~~~~2 #{@cart}"
   end
 end
