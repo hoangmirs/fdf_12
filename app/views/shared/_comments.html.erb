@@ -13,9 +13,6 @@
     </p>
   </div>
   <div class="actionBox">
-    <ul class="commentList">
-      <%= render comments %>
-    </ul>
     <% if user_signed_in? %>
       <div class="row">
         <%= form_for [object, comment] do |f| %>
@@ -30,5 +27,11 @@
         <% end %>
       </div>
     <% end %>
+    <div class="fb-comments" data-href="<%= request.original_url %>"
+      data-numposts="<%= Settings.numposts %>">
+    </div>
+    <ul class="commentList">
+      <%= render comments %>
+    </ul>
   </div>
 </div>
